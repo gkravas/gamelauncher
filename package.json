@@ -1,0 +1,21 @@
+{
+  "name": "gamelauncher",
+  "version": "0.1.0",
+  "description": "Game launcher build",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "fs-extra": "^0.23.1",
+    "grunt-aws-s3": "^0.14.0",
+    "grunt-contrib-compress": "^0.13.0",
+    "moment": "^2.10.6",
+    "grunt-electron": "^2.0.0",
+    "grunt-curl": "^2.2.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt": "^0.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+  },
+  "author": "George Kravas",
+  "license": "MIT"
+}

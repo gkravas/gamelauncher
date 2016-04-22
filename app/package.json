@@ -1,0 +1,20 @@
+{
+  "name": "GameLauncher",
+  "version": "0.1.0",
+  "main": "main.js",
+  "test": true,
+  "dependencies": {},
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.30.4"
+  },
+  "dependencies": {
+    "request": "^2.61.0",
+    "fs-extra": "^0.22.1",
+    "windows-shortcuts": "^0.1.1",
+    "bluebird": "^2.9.34",
+    "adm-zip": "^0.4.7"
+  }
+}

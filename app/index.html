@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Game Launcher</title>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>My Game Launcher</h1>
+        <div class="progress_big" id="overall_progress">
+      		<div class="progress_big_percent" id="overall_percent">
+      		</div>
+      	</div>
+
+      	<div class="label label-default" id="overall_info">
+          overall_info
+      	</div>
+
+      	<div class="progress_small" id="download_progress">
+      		<div class="progress_small_percent" id="download_percent">
+      		</div>
+      	</div>
+
+      	<div class="label label-default" id="download_info">
+          download_info
+      	</div>
+
+      	<div class="label label-default" class="progress_eta">
+          progress_eta
+      	</div>
+
+        <button type="button" class="btn btn-default" onclick="desktop.playGame();">>
+          Play Game
+        </button>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+    	window.$ = window.jQuery = require('./inc/jquery.min.js');
+    </script>
+        <script src="./inc/circle-progress.js" type="text/javascript"></script>
+        <script src="../../dist/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        <script>
+    	var utils = require('./core/utils.js');
+    	var desktop = require('./core/desktop.js')();
+    </script>
+
+    <script>
+    	var ipc = require('ipc');
+    	var updateOnlineStatus = function() {
+    	  ipc.send('online-status-changed', { online: navigator.onLine });
+    	};
+
+    	window.addEventListener('online',  updateOnlineStatus);
+    	window.addEventListener('offline',  updateOnlineStatus);
+
+    	updateOnlineStatus();
+
+    	ipc.on('progress', function(params) {
+    		utils.updateInfo({
+    			id: params.id,
+    			progress: params.progress,
+    			text: params.text
+    		});
+      });
+    </script>
+  </body>
+</html>
